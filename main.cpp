@@ -16,24 +16,29 @@ using namespace std;
 
 	//ejercicio 1
 	
+	
 	string repetidos(string original){
+		
 		
 		string result;
 		int aux = 0;
+		int aux2=0;
 		
-		for(int i = 0; i < sizeof(original); i++){
+		for(int i = 0; i < original.size(); i++){
 			aux=0;
-			for(int j=0; j < sizeof(original); j++){
+			for(int j=0; j < original.size(); j++){
 				if(original[i]==original[j] ){
 					//es repetida
 					aux++;
 				}
 			}
-			if(!(aux>1)){
+			if(aux==1){
 				result.push_back(original[i]);	
-			}	
-					
+		 	}
+		 	 
+				
 		}//fin de for principal
+		
 		
 		return result;
 	}
@@ -43,9 +48,9 @@ using namespace std;
 	
 	vector<char> Ejercicio1 (string cadena) {
 		
-		vector<char> v(sizeof(cadena)/4);
+		vector<char> v(cadena.size());
 		
-		for(int i = 0; i < sizeof(cadena); i++){
+		for(int i = 0; i < cadena.size(); i++){
 			v.push_back((cadena[i]));
 		}
 		
@@ -57,31 +62,91 @@ using namespace std;
 
 	int* ejercicio2(string cad, vector<char> vect){
 		
-		int resultado[vect.size()];
+		int* arrP = new int[vect.size()];
 		
 		int cont=0;
 		
 		for(int i = 0; i < vect.size(); i++ ){
 			cont=0;
 			char aux = vect.at(i);
-			cout<<"aux: "<<aux<<endl;
 			for(int j = 0; j < cad.size(); j++){
 				if(aux==cad.at(j)){
 					cont++;
-					cout<<"cont: "<<cont<<endl;
 				}
 			}//fin del for de la cadena
 			if(cont>=1){
-				cout<<"resultado: "<<resultado[i];
-				resultado[i]=cont;
+				arrP[i]=cont;
 			}
 			
 		}
 		
-		return resultado;
+		return arrP;
+		
+		delete arrP;
 		
 	}	
 
+	//Ejercicio 3
+
+	int* ejercicio3(int arr[], int org[], int t){
+		
+		int* aP = new int[t];
+		
+		
+		int temp;
+		//sort el arreglo original y dejarlo en forma ascendente
+		for(int i = 0; i < t; i++ ){
+			for(int j = 0; j < t; j++){
+				if(arr[i]>arr[j]){
+					temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}//fin del if
+			}//fin del for interno
+		}//fin del for externo
+		
+		//tomar el indice de los elementos del arreglo original
+		for(int i = 0; i < t; i++){
+			for(int j = 0; j < t; j++){
+				if(arr[i]==org[j]){
+					aP[i]=j;
+					
+				}
+			}
+		}
+		
+		//odio los punteros :(
+		
+		return aP;
+		
+		delete aP;
+	}
+	
+	//Ejercicio 4
+	
+	string ejercicio4(string cad){
+		
+		string resp;
+		
+		string aux = repetidos(cad);
+		char a;
+		int cont=0;
+		
+		for(int i = 0; i < aux.length(); i++){
+			cont=0;
+			a=aux.at(i);
+			for(int j = 0; j < cad.length(); j++){
+				if(a==cad.at(j)){
+					cont++;
+				}//fin del if que lleva el contador
+			}//fin del for que recorre la palabara completa
+			for(int k = 0; k < cont; k++){
+				resp+=a;
+			}//fin del for que agrega la letra las veces que tenga el cont
+		}//fin de for que recorre la palabra sin repetidos
+		
+		return resp;
+	}
 	
 	
 
@@ -89,7 +154,7 @@ int main(int argc, char** argv) {
 	
 	int opcion = 0;
 	while(opcion!=5){
-		cout<<"MENU\n"<<"1) Ejercicio 1\n"<<"2) Ejercicio 2\n"<<"3) Ejercicio 3\n"<<"4) Ejericio 4\n"<<"5) Salir"<<endl;
+		cout<<"MENU\n"<<"1) Ejercicio 1\n"<<"2) Ejercicio 2\n"<<"3) Ejercicio 3\n"<<"4) Ejercicio 4\n"<<"5) Salir"<<endl;
 		cout<<"Ingrese la opcion que desea realizar: ";
 		cin>>opcion;
 		switch(opcion){
@@ -136,22 +201,52 @@ int main(int argc, char** argv) {
 				int *p;
 				p=ejercicio2(cadena,arr);
 				for(int i = 0; i < sizeof(p); i++){
-					cout<<*(p+1)<<endl;
+					cout<<*(p+i)<<" ";
 				}
 				
-				
-				
-				
+				cout<<endl;
 				
 				break;
 			}//fin del case 2
 			
 			case 3:{
+				int tam;
+				int arr[tam];
+				int org[tam];
+				
+				cout<<"Ingrese el tamaño del arreglo de numeros: ";
+				cin>>tam;
+				for(int i = 0; i < tam;i++){
+					cout<<"Ingrese el elemento "<<i+1<<": ";
+					cin>>arr[i];
+				}
+				
+				for(int i = 0; i < tam;i++){
+					org[i]=arr[i];
+				}
+				
+			
+				int *punt;
+				
+				punt = ejercicio3(arr,org,tam);
+				
+				cout<<"[ ";
+				for(int i = 0; i < tam; i++){
+					cout<<*(punt+i)<<" ";
+				}
+				cout<<"]"<<endl;
 				
 				break;
 			}//fin del case 3
 			
 			case 4:{
+				
+				string cadena;
+				cout<<"Ingrese una palabra: ";
+				cin>>cadena;
+				
+				cout<<ejercicio4(cadena)<<endl;
+				
 				
 				break;
 			}//fin del case 4
