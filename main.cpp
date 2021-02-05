@@ -7,6 +7,13 @@ using namespace std;
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+	//probar
+	void mostrar_vector(const vector<char> elementos) {
+		for (char elemento : elementos) cout << elemento << " ";
+		cout << endl;
+	}
+
+
 	//ejercicio 1
 	
 	string repetidos(string original){
@@ -47,8 +54,34 @@ using namespace std;
 	}
 	
 	//Ejercicio 2
-	
-	int* 
+
+	int* ejercicio2(string cad, vector<char> vect){
+		
+		int resultado[vect.size()];
+		
+		int cont=0;
+		
+		for(int i = 0; i < vect.size(); i++ ){
+			cont=0;
+			char aux = vect.at(i);
+			cout<<"aux: "<<aux<<endl;
+			for(int j = 0; j < cad.size(); j++){
+				if(aux==cad.at(j)){
+					cont++;
+					cout<<"cont: "<<cont<<endl;
+				}
+			}//fin del for de la cadena
+			if(cont>=1){
+				cout<<"resultado: "<<resultado[i];
+				resultado[i]=cont;
+			}
+			
+		}
+		
+		return resultado;
+		
+	}	
+
 	
 	
 
@@ -79,14 +112,36 @@ int main(int argc, char** argv) {
 				cout<<"]"<<endl;
 				//no se por que se imprime con unos espacios extra ahí
 				
+				
+				
 				break;
 			}//fin del case 1
 			
 			case 2:{
 				
 				string cadena;
-				vector<char> arr()
+				int tam;
+				string letras;
 				cout<<"Ingrese una palabra: ";
+				cin>>cadena;
+				cout<<"Ingrese los caracteres del vector (sin espacios ni comas): ";
+				cin>>letras;
+				vector<char> arr(letras.size());
+				
+				//recorrer la cadena de letras y meterlas en el vector
+				for(int i = 0; i < letras.size(); i++){
+					arr.push_back(letras.at(i));
+				}
+				
+				int *p;
+				p=ejercicio2(cadena,arr);
+				for(int i = 0; i < sizeof(p); i++){
+					cout<<*(p+1)<<endl;
+				}
+				
+				
+				
+				
 				
 				break;
 			}//fin del case 2
