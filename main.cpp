@@ -1,8 +1,56 @@
 #include <iostream>
+#include <array>
+#include <string.h>
+#include <vector>
 
 using namespace std;
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+	//ejercicio 1
+	
+	string repetidos(string original){
+		
+		string result;
+		int aux = 0;
+		
+		for(int i = 0; i < sizeof(original); i++){
+			aux=0;
+			for(int j=0; j < sizeof(original); j++){
+				if(original[i]==original[j] ){
+					//es repetida
+					aux++;
+				}
+			}
+			if(!(aux>1)){
+				result.push_back(original[i]);	
+			}	
+					
+		}//fin de for principal
+		
+		return result;
+	}
+	
+	//ARREGLAR ESTOOOOOOOO
+	
+	
+	vector<char> Ejercicio1 (string cadena) {
+		
+		vector<char> v(sizeof(cadena)/4);
+		
+		for(int i = 0; i < sizeof(cadena); i++){
+			v.push_back((cadena[i]));
+		}
+		
+		return v;
+		
+	}
+	
+	//Ejercicio 2
+	
+	int* 
+	
+	
 
 int main(int argc, char** argv) {
 	
@@ -15,10 +63,30 @@ int main(int argc, char** argv) {
 			
 			case 1:{
 				
+				string cadena;
+				cout<<"Ingrese una palabra: ";
+				cin>>cadena;
+				
+				cout<<repetidos(cadena)<<endl;
+				
+				vector<char> resp = Ejercicio1((repetidos(cadena)));
+				
+				//imprimir vector
+				cout<<"[";
+				for(int i = 0; i < resp.size(); i++){
+					cout<<resp.at(i)<<" ";
+				}
+				cout<<"]"<<endl;
+				//no se por que se imprime con unos espacios extra ahí
+				
 				break;
 			}//fin del case 1
 			
 			case 2:{
+				
+				string cadena;
+				vector<char> arr()
+				cout<<"Ingrese una palabra: ";
 				
 				break;
 			}//fin del case 2
